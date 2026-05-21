@@ -1,12 +1,11 @@
-﻿using BepInEx;
+using BepInEx;
 using UnityEngine;
-using MonoMod.RuntimeDetour;
-using UnityEngine.Rendering;
 using System.Reflection;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using static team.pinewood.utilities.Reflection;
+using Battle;
 
 namespace kf3tweaks
 {
@@ -127,7 +126,7 @@ namespace kf3tweaks
                     KeyCode keyCode = FRIEND_ACT_KEYCODES[i];
                     if (Input.GetKeyDown(keyCode))
                     {
-                        SceneBattle.GUI gui = GetField<SceneBattle, SceneBattle.GUI>(self, "guiData", BindingFlags.NonPublic | BindingFlags.Instance);
+                        SceneBattle_GUI gui = GetField<SceneBattle, SceneBattle_GUI>(self, "_guiData", BindingFlags.NonPublic | BindingFlags.Instance);
                         List<Transform> characterClickboxes; 
                         if (Input.GetKey(KeyCode.LeftShift)) // Touch miracles if lshift is held
                         {
@@ -144,7 +143,7 @@ namespace kf3tweaks
 
                         if (i < characterClickboxes.Count)
                         {
-                            SetField<SceneBattle>(self, "currentTouch", characterClickboxes[i]);
+                            SetField<SceneBattle>(self, "_currentTouch", characterClickboxes[i]);
                         }
                     }
                 }
@@ -154,17 +153,17 @@ namespace kf3tweaks
                 }
                 if (Input.GetKeyDown(KeyCode.Space)) // Use refill
                 {
-                    SceneBattle.GUI gui = GetField<SceneBattle, SceneBattle.GUI>(self, "guiData", BindingFlags.NonPublic | BindingFlags.Instance);
-                    SetField<SceneBattle>(self, "currentTouch", gui.TouchActGage);
+                    SceneBattle_GUI gui = GetField<SceneBattle, SceneBattle_GUI>(self, "_guiData", BindingFlags.NonPublic | BindingFlags.Instance);
+                    SetField<SceneBattle>(self, "_currentTouch", gui.TouchActGage);
                 }
                 if (Input.GetKeyDown(KeyCode.F)) // Toggle fast mode
                 {
-                    SceneBattle.GUI gui = GetField<SceneBattle, SceneBattle.GUI>(self, "guiData", BindingFlags.NonPublic | BindingFlags.Instance);
+                    SceneBattle_GUI gui = GetField<SceneBattle, SceneBattle_GUI>(self, "_guiData", BindingFlags.NonPublic | BindingFlags.Instance);
                     gui.BtnFast.m_Button.onClick?.Invoke();
                 }
                 if (Input.GetKeyDown(KeyCode.A)) // Toggle autoplay
                 {
-                    SceneBattle.GUI gui = GetField<SceneBattle, SceneBattle.GUI>(self, "guiData", BindingFlags.NonPublic | BindingFlags.Instance);
+                    SceneBattle_GUI gui = GetField<SceneBattle, SceneBattle_GUI>(self, "_guiData", BindingFlags.NonPublic | BindingFlags.Instance);
                     gui.BtnAuto.m_Button.onClick?.Invoke();
                 }
             }
