@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>TextFitting</AssemblyName>
     <Description>Fixes Kemono Friends 3 text field sizes and wrapping.</Description>
     <Version>0.10</Version>
